@@ -5,7 +5,7 @@
 
 
 // Autoload classes
-function __autoload($className) {
+function classAutoLoader($className) {
   if(file_exists(ROOT . DS . 'core' . DS . $className . '.php')){
     require_once(ROOT . DS . 'core' . DS . $className . '.php');
   }elseif (file_exists(ROOT . DS . 'app' . DS . 'controllers' . DS . $className . '.php')) {
@@ -14,6 +14,9 @@ function __autoload($className) {
     require_once(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php');
   }
 }
+
+spl_autoload_register('classAutoLoader');
+
 
 // Route the request
 Router::route($url);
