@@ -42,7 +42,7 @@
       return $this;
     }
 
-    protected function _read($table, $params=[]){
+    public function _read($table, $params=[]){
       $conditionString = '';
       $bind = [];
       $order = '';
@@ -64,7 +64,7 @@
       }
     }
       //bind
-      if(array_key_exists('bond', $params)){
+      if(array_key_exists('bind', $params)){
         $bind = $params['bind'];
       }
 
@@ -79,7 +79,7 @@
       }
       $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
       if($this->query($sql, $bind)){
-        if($this->_results && !count($this->_results)) return false;
+        if(!count($this->_results)) return false;
         return true;
       }
       return false;

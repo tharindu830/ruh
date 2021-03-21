@@ -9,12 +9,12 @@
 
      $db = DB::getInstance();
 
-     $contacts = $db->find('contacts', [
-       'conditions' => ["fname = ?"],
-       'bind' => ['tharindu'],
-       'order' => "lname, fname",
-       'limit' => 5
-     ]);
+     $contacts = $db->findFirst('contacts', [
+     'conditions' => "id =?",
+     'bind' => [4]
+
+   ]);
+
      dnd($contacts);
      $this->view->render('home/index');
    }
