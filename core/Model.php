@@ -8,15 +8,16 @@
       $this->_db = DB::getInstance();
       $this->_table = $table;
       $this->_setTableColums();
-      $this->$_modelName = str_replace(' ', '', ucwords(str_replace('_',' ', $this->_table)));
+      $this->_modelName = str_replace(' ', '', ucwords(str_replace('_',' ', $this->_table)));
     }
 
     protected function _setTableColums()
     {
       $columns = $this->get_columns();
       foreach ($columns as $column) {
+        $columnName = $column->Field;
         $this->_columnNames[] = $column->Field;
-        $this->($columnName) = null;
+        $this->{$columnName} = null;
       }
     }
 
@@ -31,10 +32,9 @@
       $resultsQuery = $this->_db->find($this->_table, $params);
       foreach ($resultsQuery as $result) {
         $obj = new $this->_modelName($this->_table);
-        foreach($result as $key => $val) {
-          $obj->$key = $val;
-        }
-        $results[] = = $obj;
+        $obj->populateObjData($result);
+        $results[] = $obj;
+
       }
       return $results;
     }
@@ -59,7 +59,7 @@
         $fields[$column] = $this->column;
       }
       //determine wether to update or INSERT
-      if (property_exists($this->, 'id') && $this->id != '') {
+      if (property_exists($this->id) && $this->id != '') {
         return $this->update($this->id, $fields);
       } else {
         return $this->insert($fields);
@@ -105,8 +105,8 @@
     {
       if (!empty($params)) {
         foreach ($params as $key => $val) {
-          if (in_array($key, $this->_columnNames) {
-              $this->$key = sanitize($val);
+          if (in_array($key, $this->_columnNames)) {
+              $this->$key = sanitize($val) ;
           }
         }
         return true;
@@ -117,7 +117,7 @@
     protected function populateObjData($result)
     {
       foreach ($result as $key => $val) {
-        $this->$key = $val;
+        $this->$key = $val ;
       }
     }
   }
