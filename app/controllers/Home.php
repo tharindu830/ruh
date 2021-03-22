@@ -7,15 +7,6 @@
 
    public function indexAction(){
 
-     $db = DB::getInstance();
-
-     $contacts = $db->findFirst('contacts', [
-     'conditions' => "id =?",
-     'bind' => [4]
-
-   ]);
-
-     dnd($contacts);
      $this->view->render('home/index');
    }
  }
