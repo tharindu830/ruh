@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="text" name="password" id="password" class="form-control" >
+      <input type="password" name="password" id="password" class="form-control" >
     </div>
   <div class="form-group">
     <label for="remember_me">Remember Me <input type="checkbox" name="remember_me" id="remember_me" value="on" > </label>

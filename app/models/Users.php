@@ -13,9 +13,9 @@
       $this->_softDelete = true;
       if ($user != '') {
         if (is_int($user)) {
-          $u = $this->_db->findFirst('users',['conditions'=>'id =?', 'bind'=>[$user]]);
+          $u = $this->_db->findFirst('users',['conditions'=>'id = ?', 'bind'=>[$user]]);
         } else {
-          $u = $this->_db->findFirst('users', ['condtions'=>'username = ?','bind'=>[$user]]);
+          $u = $this->_db->findFirst('users', ['conditions'=>'username = ?','bind'=>[$user]]);
         }
         if ($u) {
           foreach ($u as $key => $val) {
@@ -36,9 +36,9 @@
       if ($rememberMe) {
         $hash = md5(uniqid() + rand(0, 100));
         $user_agent = Session::uagent_no_version();
-        Cookies::set($this->_cookieName, $hash, REMEBER_COOCKIE_EXPIRY);
+        Cookie::set($this->_cookieName, $hash, REMEBER_COOCKIE_EXPIRY);
         $fields = ['session'=>$hash, 'user_agent'=>$user_agent, 'user_id'=>$this->id];
-        $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND USER_AGENT = ?", [$this->id, $user_agent]);
+        $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
         $this->_db->insert('user_sessions', $fields);
       }
     }

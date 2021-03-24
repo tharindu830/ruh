@@ -1,7 +1,7 @@
 <?php
 
   class Controller extends Application{
-    protected $_clotroller, $_action;
+    protected $_controller, $_action;
     public $view;
 
     public function __construct($controller, $action) {

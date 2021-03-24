@@ -43,7 +43,10 @@
     {
       $resultsQuery = $this->_db->findFirst($this->_table, $params);
       $result = new $this->_modelName($this->_table);
-      $result->populateObjData($resultsQuery);
+      if ($resultsQuery) {
+        $result->populateObjData($resultsQuery);
+      }
+
       return $result;
     }
 
@@ -96,7 +99,7 @@
     public function data()
     {
       $data = new stdClass();
-      foreach ($this->columnNames as $column) {
+      foreach ($this->_columnNames as $column) {
         $data->column = $this->column;
       }
     }
@@ -116,7 +119,7 @@
 
     protected function populateObjData($result)
     {
-      foreach ($result as $key => $val) {
+      foreach($result as $key => $val) {
         $this->$key = $val ;
       }
     }
