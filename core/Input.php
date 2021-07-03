@@ -10,7 +10,7 @@
       {
         if(isset($_POST[$input])) {
           return self::sanitize($_POST[$input]);
-        }elseif (isset($_GET[$input])) {
+        }else if (isset($_GET[$input])) {
           return self::sanitize($_GET[$input]);
         }
       }

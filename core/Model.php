@@ -26,10 +26,27 @@
       return $this->_db->get_columns($this->_table);
     }
 
+    protected function _softDeleteParams($params){
+      if ($this->_softDelete) {
+        if (array_key_exists('conditions', $params)) {
+          if (is_array($params['conditions'])) {
+            $params['conditions'][] = "deleted != 1";
+          }else {
+            $params['conditions'] .= " AND deleted != 1";
+          }
+        }else {
+          $params['conditions'] = "deleted != 1";
+        }
+      }
+       return $params;
+    }
+
     public function find($params= [])
     {
+      $params = $this->_softDeleteParams($params);
       $results = [];
       $resultsQuery = $this->_db->find($this->_table, $params);
+      if(!$resultsQuery) return [];
       foreach ($resultsQuery as $result) {
         $obj = new $this->_modelName($this->_table);
         $obj->populateObjData($result);
@@ -39,12 +56,16 @@
       return $results;
     }
 
+
     public function findFirst($params = [])
     {
+      $params = $this->_softDeleteParams($params);
       $resultsQuery = $this->_db->findFirst($this->_table, $params);
       $result = new $this->_modelName($this->_table);
       if ($resultsQuery) {
         $result->populateObjData($resultsQuery);
+      }else {
+        $result = false;
       }
 
       return $result;
@@ -59,10 +80,10 @@
     {
       $fields = [];
       foreach ($this->_columnNames as $column) {
-        $fields[$column] = $this->column;
+        $fields[$column] = $this->$column;
       }
       //determine wether to update or INSERT
-      if (property_exists($this->id) && $this->id != '') {
+      if (property_exists($this, 'id') && $this->id != '') {
         return $this->update($this->id, $fields);
       } else {
         return $this->insert($fields);
@@ -81,7 +102,7 @@
       return $this->_db->update($this->_table, $id, $fields);
     }
 
-    public function delete($id)
+    public function delete($id = '')
     {
       if($id == '' && $this->id == '') return false;
       $id = ($id == '')? $this->id : $id;

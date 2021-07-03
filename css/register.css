@@ -1,0 +1,263 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+body{
+	display: flex;
+	padding: 10px 10px;
+	min-height: 100vh;
+	align-items: center;
+	justify-content: center;
+	background-color: #ffffff;
+}
+
+.wrapper{
+	width: 720px;
+	background-color: #dddddd;
+	border-radius: 5px;
+}
+.wrapper header{
+	font-size: 30px;
+	font-weight: 600;
+	padding:20px 30px;
+	border-radius: 5px;
+	color: #1A237E;
+	border-bottom: 3px solid #bfbfbf;
+}
+
+.wrapper form{
+	margin: 35px 30px;
+}
+
+/*-----------------------------------------------------form style----------------------------------------*/
+
+form .dbl-field{
+	display: flex;
+	align-items: center;
+	margin-bottom: 0px;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.dbl-field .field{
+	height: 50px;
+	position: relative;
+	width: calc(100% / 2 - 20px);
+	margin-bottom: 50px;
+}
+
+.dbl-field .field .name,.massage .name{
+	margin-bottom: 1px;
+	font-style: italic;
+	color: #1A237E;
+	font-weight:bold;
+}
+
+form .field select{
+	color:#6b6b6b;
+	-webkit-appearance:none;
+}
+
+form .field input,
+form .field select,
+form .field textarea{
+	height: 100%;
+	width: 100%;
+	outline: none;
+	padding: 0 18px 0 25px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: 1px solid #bfbfbf;
+}
+
+form .field input::placeholder,
+form .field textarea::placeholder{
+	color:#bfbfbf;
+}
+
+form .field input:focus,
+form .field select:focus,
+form .field textarea:focus{
+	border: 2px solid #1A237E;
+}
+
+/*form .field input:hover,
+form .field select:hover{
+	color: #6b6b6b;
+}*/
+
+.wrapper .dbl-field .field i{
+	position:absolute;
+	left: 13px;
+	top:30%;
+	font-size: 17px;
+	pointer-events: none;
+	transform: translate(-50%);
+	padding-top: 26px;
+	color:#6b6b6b;
+}
+
+.wrapper .dbl-field .field input[type=text]:focus + i,
+.wrapper .dbl-field .field input[type=date]:focus + i,
+.wrapper .dbl-field .field textarea:focus + i,
+.wrapper .dbl-field .field input[type=password]:focus + i,
+.wrapper .dbl-field .field select:focus + i{
+	color:#1A237E;
+}
+
+form .field textarea{
+	min-width: 100%;
+	max-width: 100%;
+	max-height: 200%;
+	min-height: 50px;
+	padding:13px 18px 0 25px;
+	padding-top: 10px;
+}
+
+
+/*----------------------------------------------button style----------------------------*/
+
+form .button-area{
+	margin:40px 0;
+	display: flex;
+}
+
+.button-area button{
+	padding:13px;
+	border: none;
+	color:#fff;
+	cursor: pointer;
+	border-radius: 5px;
+	background: #1A237E;
+	padding-left: 13px 25px;
+	width: 150px;
+	font-size: 17px;
+	margin:25px 255px;
+}
+
+.button-area button:hover{
+	background-color:#2c2e50;
+}
+
+/*-------------------------------------------validation----------------------------------------------*/
+
+@media(max-width: 600px){
+	.wrapper header{
+		text-align: center;
+	}
+	form .dbl-field{
+		margin-bottom: 0px;
+		flex-direction: column;
+	}
+	.dbl-field .field{
+		width:100%;
+		margin-bottom: 40px;
+	}
+-----------------------------
+	.dbl-field .massage{
+		width:100%;
+		margin-bottom: 40px;
+	}
+
+	/*.dbl-field .field i{
+		padding-left: 0px;
+	}*/
+
+	.dbl-field .field .show-hide i{
+		margin-left: 100px;
+	}
+
+	/*form .massage input{
+		resize: none;
+	}*/
+	form .button-area{
+		flex-direction:column;
+	}
+	.button-area button{
+		width:100% ;
+		margin-left: 0px;
+	}
+}
+
+/*--------------------------------------error style--------------------------------------*/
+
+form #password_error{
+	margin-top:5px;
+	width:345px;
+	font-size:18px;
+	color:#C62828;
+	background: rgba(255,0,0,0.1);
+	text-align:center;
+	padding:5px 8px;
+	border-radius:3px;
+	border:2px solid #6b6b6b;
+	display:none;
+}
+
+-------------------
+
+form .massage ~ i{
+	color:#0d6efd;
+}
+
+form .massage{
+	position: relative;
+	height: 50px;
+	position: relative;
+	width: calc(100% / 2 - 20px);
+	margin-bottom: 50px;
+
+}
+
+
+form .massage input{
+	height: 100%;
+	width: 100%;
+	outline: none;
+	padding: 0 18px 0 25px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: 1px solid #bfbfbf;
+	font-family:'Poppins' ,sans-serif;
+}
+
+form .massage input::placeholder{
+	color:#bfbfbf;
+}
+
+form .massage input:focus{
+	border: 2px solid #1A237E;
+}
+
+.dbl-field .massage input #icon:focus + i{
+	color:#1A237E;
+}
+
+
+.massage  #eye, #eye1{
+	color:#0d6efd;
+	margin-left: 315px;
+	display: ;
+	position:absolute;
+	left: 13px;
+	top:30%;
+	font-size: 17px;
+	transform: translate(-50%);
+	padding-top: 26px;
+	color:#6b6b6b;
+}
+
+.wrapper .dbl-field .massage  #icon{
+	position:absolute;
+	left: 13px;
+	top:30%;
+	font-size: 17px;
+	pointer-events: none;
+	transform: translate(-50%);
+	padding-top: 26px;
+	color:#6b6b6b;
+}
